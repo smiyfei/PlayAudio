@@ -1,0 +1,326 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1DAFC6B61637F265007C9988 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B51637F265007C9988 /* UIKit.framework */; };
+		1DAFC6B81637F265007C9988 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B71637F265007C9988 /* Foundation.framework */; };
+		1DAFC6BA1637F265007C9988 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B91637F265007C9988 /* CoreGraphics.framework */; };
+		1DAFC6C01637F265007C9988 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6BE1637F265007C9988 /* InfoPlist.strings */; };
+		1DAFC6C21637F265007C9988 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6C11637F265007C9988 /* main.m */; };
+		1DAFC6C61637F265007C9988 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6C51637F265007C9988 /* AppDelegate.m */; };
+		1DAFC6C81637F265007C9988 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6C71637F265007C9988 /* Default.png */; };
+		1DAFC6CA1637F265007C9988 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6C91637F265007C9988 /* Default@2x.png */; };
+		1DAFC6CC1637F265007C9988 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6CB1637F265007C9988 /* Default-568h@2x.png */; };
+		1DAFC6CF1637F265007C9988 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6CE1637F265007C9988 /* ViewController.m */; };
+		1DAFC6D21637F265007C9988 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6D01637F265007C9988 /* ViewController.xib */; };
+		1DAFC6DC1637F37D007C9988 /* AudioTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6DB1637F37D007C9988 /* AudioTableView.m */; };
+		1DAFC6DF1637F397007C9988 /* AudioTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6DE1637F397007C9988 /* AudioTableViewCell.m */; };
+		1DAFC6E11637F692007C9988 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6E01637F692007C9988 /* AudioToolbox.framework */; };
+		1DAFC6E31637F69A007C9988 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6E21637F69A007C9988 /* MediaPlayer.framework */; };
+		1DAFC6E41637F6D5007C9988 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6D91637F33F007C9988 /* AudioStreamer.m */; };
+		1DAFC6E61637F778007C9988 /* kaibulekou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6E51637F778007C9988 /* kaibulekou.mp3 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1DAFC6B11637F265007C9988 /* PlayAudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayAudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DAFC6B51637F265007C9988 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1DAFC6B71637F265007C9988 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1DAFC6B91637F265007C9988 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1DAFC6BD1637F265007C9988 /* PlayAudio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayAudio-Info.plist"; sourceTree = "<group>"; };
+		1DAFC6BF1637F265007C9988 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1DAFC6C11637F265007C9988 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1DAFC6C31637F265007C9988 /* PlayAudio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlayAudio-Prefix.pch"; sourceTree = "<group>"; };
+		1DAFC6C41637F265007C9988 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1DAFC6C51637F265007C9988 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1DAFC6C71637F265007C9988 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		1DAFC6C91637F265007C9988 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		1DAFC6CB1637F265007C9988 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		1DAFC6CD1637F265007C9988 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1DAFC6CE1637F265007C9988 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1DAFC6D11637F265007C9988 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		1DAFC6D81637F33F007C9988 /* AudioStreamer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
+		1DAFC6D91637F33F007C9988 /* AudioStreamer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
+		1DAFC6DA1637F37D007C9988 /* AudioTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTableView.h; sourceTree = "<group>"; };
+		1DAFC6DB1637F37D007C9988 /* AudioTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioTableView.m; sourceTree = "<group>"; };
+		1DAFC6DD1637F397007C9988 /* AudioTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTableViewCell.h; sourceTree = "<group>"; };
+		1DAFC6DE1637F397007C9988 /* AudioTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioTableViewCell.m; sourceTree = "<group>"; };
+		1DAFC6E01637F692007C9988 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		1DAFC6E21637F69A007C9988 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		1DAFC6E51637F778007C9988 /* kaibulekou.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kaibulekou.mp3; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1DAFC6AE1637F264007C9988 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DAFC6E31637F69A007C9988 /* MediaPlayer.framework in Frameworks */,
+				1DAFC6E11637F692007C9988 /* AudioToolbox.framework in Frameworks */,
+				1DAFC6B61637F265007C9988 /* UIKit.framework in Frameworks */,
+				1DAFC6B81637F265007C9988 /* Foundation.framework in Frameworks */,
+				1DAFC6BA1637F265007C9988 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1DAFC6A61637F264007C9988 = {
+			isa = PBXGroup;
+			children = (
+				1DAFC6BB1637F265007C9988 /* PlayAudio */,
+				1DAFC6B41637F265007C9988 /* Frameworks */,
+				1DAFC6B21637F265007C9988 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1DAFC6B21637F265007C9988 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1DAFC6B11637F265007C9988 /* PlayAudio.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1DAFC6B41637F265007C9988 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DAFC6E21637F69A007C9988 /* MediaPlayer.framework */,
+				1DAFC6E01637F692007C9988 /* AudioToolbox.framework */,
+				1DAFC6B51637F265007C9988 /* UIKit.framework */,
+				1DAFC6B71637F265007C9988 /* Foundation.framework */,
+				1DAFC6B91637F265007C9988 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1DAFC6BB1637F265007C9988 /* PlayAudio */ = {
+			isa = PBXGroup;
+			children = (
+				1DAFC6D81637F33F007C9988 /* AudioStreamer.h */,
+				1DAFC6D91637F33F007C9988 /* AudioStreamer.m */,
+				1DAFC6C41637F265007C9988 /* AppDelegate.h */,
+				1DAFC6C51637F265007C9988 /* AppDelegate.m */,
+				1DAFC6CD1637F265007C9988 /* ViewController.h */,
+				1DAFC6CE1637F265007C9988 /* ViewController.m */,
+				1DAFC6DA1637F37D007C9988 /* AudioTableView.h */,
+				1DAFC6DB1637F37D007C9988 /* AudioTableView.m */,
+				1DAFC6DD1637F397007C9988 /* AudioTableViewCell.h */,
+				1DAFC6DE1637F397007C9988 /* AudioTableViewCell.m */,
+				1DAFC6D01637F265007C9988 /* ViewController.xib */,
+				1DAFC6BC1637F265007C9988 /* Supporting Files */,
+			);
+			path = PlayAudio;
+			sourceTree = "<group>";
+		};
+		1DAFC6BC1637F265007C9988 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1DAFC6E51637F778007C9988 /* kaibulekou.mp3 */,
+				1DAFC6BD1637F265007C9988 /* PlayAudio-Info.plist */,
+				1DAFC6BE1637F265007C9988 /* InfoPlist.strings */,
+				1DAFC6C11637F265007C9988 /* main.m */,
+				1DAFC6C31637F265007C9988 /* PlayAudio-Prefix.pch */,
+				1DAFC6C71637F265007C9988 /* Default.png */,
+				1DAFC6C91637F265007C9988 /* Default@2x.png */,
+				1DAFC6CB1637F265007C9988 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1DAFC6B01637F264007C9988 /* PlayAudio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DAFC6D51637F265007C9988 /* Build configuration list for PBXNativeTarget "PlayAudio" */;
+			buildPhases = (
+				1DAFC6AD1637F264007C9988 /* Sources */,
+				1DAFC6AE1637F264007C9988 /* Frameworks */,
+				1DAFC6AF1637F264007C9988 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlayAudio;
+			productName = PlayAudio;
+			productReference = 1DAFC6B11637F265007C9988 /* PlayAudio.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1DAFC6A81637F264007C9988 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = self;
+			};
+			buildConfigurationList = 1DAFC6AB1637F264007C9988 /* Build configuration list for PBXProject "PlayAudio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1DAFC6A61637F264007C9988;
+			productRefGroup = 1DAFC6B21637F265007C9988 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1DAFC6B01637F264007C9988 /* PlayAudio */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1DAFC6AF1637F264007C9988 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DAFC6C01637F265007C9988 /* InfoPlist.strings in Resources */,
+				1DAFC6C81637F265007C9988 /* Default.png in Resources */,
+				1DAFC6CA1637F265007C9988 /* Default@2x.png in Resources */,
+				1DAFC6CC1637F265007C9988 /* Default-568h@2x.png in Resources */,
+				1DAFC6D21637F265007C9988 /* ViewController.xib in Resources */,
+				1DAFC6E61637F778007C9988 /* kaibulekou.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1DAFC6AD1637F264007C9988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DAFC6E41637F6D5007C9988 /* AudioStreamer.m in Sources */,
+				1DAFC6C21637F265007C9988 /* main.m in Sources */,
+				1DAFC6C61637F265007C9988 /* AppDelegate.m in Sources */,
+				1DAFC6CF1637F265007C9988 /* ViewController.m in Sources */,
+				1DAFC6DC1637F37D007C9988 /* AudioTableView.m in Sources */,
+				1DAFC6DF1637F397007C9988 /* AudioTableViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1DAFC6BE1637F265007C9988 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DAFC6BF1637F265007C9988 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1DAFC6D01637F265007C9988 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DAFC6D11637F265007C9988 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DAFC6D31637F265007C9988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1DAFC6D41637F265007C9988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1DAFC6D61637F265007C9988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PlayAudio/PlayAudio-Prefix.pch";
+				INFOPLIST_FILE = "PlayAudio/PlayAudio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1DAFC6D71637F265007C9988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PlayAudio/PlayAudio-Prefix.pch";
+				INFOPLIST_FILE = "PlayAudio/PlayAudio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DAFC6AB1637F264007C9988 /* Build configuration list for PBXProject "PlayAudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DAFC6D31637F265007C9988 /* Debug */,
+				1DAFC6D41637F265007C9988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DAFC6D51637F265007C9988 /* Build configuration list for PBXNativeTarget "PlayAudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DAFC6D61637F265007C9988 /* Debug */,
+				1DAFC6D71637F265007C9988 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1DAFC6A81637F264007C9988 /* Project object */;
+}
