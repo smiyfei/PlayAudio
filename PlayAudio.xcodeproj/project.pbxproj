@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D53097F1638E1440083F60C /* TBAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D53097E1638E1440083F60C /* TBAudioPlayer.m */; };
+		1D5309821638E33D0083F60C /* TBAudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5309811638E33D0083F60C /* TBAudioStreamer.m */; };
+		1D5309851638E4350083F60C /* TBAudioErrorConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5309841638E4350083F60C /* TBAudioErrorConverter.m */; };
+		1D53099016392FA20083F60C /* AudioParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D53098F16392FA20083F60C /* AudioParam.m */; };
+		1D53099E163948C30083F60C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D53099D163948C30083F60C /* CFNetwork.framework */; };
 		1DAFC6B61637F265007C9988 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B51637F265007C9988 /* UIKit.framework */; };
 		1DAFC6B81637F265007C9988 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B71637F265007C9988 /* Foundation.framework */; };
 		1DAFC6BA1637F265007C9988 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B91637F265007C9988 /* CoreGraphics.framework */; };
@@ -27,6 +32,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D53097D1638E1440083F60C /* TBAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAudioPlayer.h; sourceTree = "<group>"; };
+		1D53097E1638E1440083F60C /* TBAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAudioPlayer.m; sourceTree = "<group>"; };
+		1D5309801638E33D0083F60C /* TBAudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAudioStreamer.h; sourceTree = "<group>"; };
+		1D5309811638E33D0083F60C /* TBAudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAudioStreamer.m; sourceTree = "<group>"; };
+		1D5309831638E4350083F60C /* TBAudioErrorConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAudioErrorConverter.h; sourceTree = "<group>"; };
+		1D5309841638E4350083F60C /* TBAudioErrorConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAudioErrorConverter.m; sourceTree = "<group>"; };
+		1D53098E16392FA20083F60C /* AudioParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioParam.h; sourceTree = "<group>"; };
+		1D53098F16392FA20083F60C /* AudioParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioParam.m; sourceTree = "<group>"; };
+		1D53099D163948C30083F60C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1DAFC6B11637F265007C9988 /* PlayAudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayAudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DAFC6B51637F265007C9988 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1DAFC6B71637F265007C9988 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D53099E163948C30083F60C /* CFNetwork.framework in Frameworks */,
 				1DAFC6E31637F69A007C9988 /* MediaPlayer.framework in Frameworks */,
 				1DAFC6E11637F692007C9988 /* AudioToolbox.framework in Frameworks */,
 				1DAFC6B61637F265007C9988 /* UIKit.framework in Frameworks */,
@@ -70,6 +85,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D5309781638E0810083F60C /* TBAudio */ = {
+			isa = PBXGroup;
+			children = (
+				1D53097D1638E1440083F60C /* TBAudioPlayer.h */,
+				1D53097E1638E1440083F60C /* TBAudioPlayer.m */,
+				1D53098E16392FA20083F60C /* AudioParam.h */,
+				1D53098F16392FA20083F60C /* AudioParam.m */,
+				1D5309801638E33D0083F60C /* TBAudioStreamer.h */,
+				1D5309811638E33D0083F60C /* TBAudioStreamer.m */,
+				1D5309831638E4350083F60C /* TBAudioErrorConverter.h */,
+				1D5309841638E4350083F60C /* TBAudioErrorConverter.m */,
+			);
+			name = TBAudio;
+			sourceTree = "<group>";
+		};
 		1DAFC6A61637F264007C9988 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +120,7 @@
 		1DAFC6B41637F265007C9988 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D53099D163948C30083F60C /* CFNetwork.framework */,
 				1DAFC6E21637F69A007C9988 /* MediaPlayer.framework */,
 				1DAFC6E01637F692007C9988 /* AudioToolbox.framework */,
 				1DAFC6B51637F265007C9988 /* UIKit.framework */,
@@ -102,6 +133,7 @@
 		1DAFC6BB1637F265007C9988 /* PlayAudio */ = {
 			isa = PBXGroup;
 			children = (
+				1D5309781638E0810083F60C /* TBAudio */,
 				1DAFC6D81637F33F007C9988 /* AudioStreamer.h */,
 				1DAFC6D91637F33F007C9988 /* AudioStreamer.m */,
 				1DAFC6C41637F265007C9988 /* AppDelegate.h */,
@@ -206,6 +238,10 @@
 				1DAFC6CF1637F265007C9988 /* ViewController.m in Sources */,
 				1DAFC6DC1637F37D007C9988 /* AudioTableView.m in Sources */,
 				1DAFC6DF1637F397007C9988 /* AudioTableViewCell.m in Sources */,
+				1D53097F1638E1440083F60C /* TBAudioPlayer.m in Sources */,
+				1D5309821638E33D0083F60C /* TBAudioStreamer.m in Sources */,
+				1D5309851638E4350083F60C /* TBAudioErrorConverter.m in Sources */,
+				1D53099016392FA20083F60C /* AudioParam.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +355,7 @@
 				1DAFC6D71637F265007C9988 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

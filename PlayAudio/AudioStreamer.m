@@ -8,6 +8,18 @@
 
 #import "AudioStreamer.h"
 
+@interface AudioStreamer()
+
+//定义回调(Callback)函数
+static void BufferCallack(void *inUserData,AudioQueueRef inAQ,
+                          AudioQueueBufferRef buffer);
+//定义缓存数据读取方法
+-(void)audioQueueOutputWithQueue:(AudioQueueRef)audioQueue
+                     queueBuffer:(AudioQueueBufferRef)audioQueueBuffer;
+-(UInt32)readPacketsIntoBuffer:(AudioQueueBufferRef)buffer;
+
+@end
+
 static UInt32 gBufferSizeBytes=0x10000;//It muse be pow(2,x)
 
 @implementation AudioStreamer
@@ -21,9 +33,8 @@ static void BufferCallback(void *inUserData,AudioQueueRef inAQ,
     [player audioQueueOutputWithQueue:inAQ queueBuffer:buffer];
 }
 
-
 //缓存数据读取方法的实现
--(void) audioQueueOutputWithQueue:(AudioQueueRef)audioQueue queueBuffer:(AudioQueueBufferRef)audioQueueBuffer{
+-(void)audioQueueOutputWithQueue:(AudioQueueRef)audioQueue queueBuffer:(AudioQueueBufferRef)audioQueueBuffer{
     OSStatus status;
     
     //读取包数据
@@ -43,7 +54,7 @@ static void BufferCallback(void *inUserData,AudioQueueRef inAQ,
 }
 
 //音频播放方法的实现
-- (id)initWithAudioPath:(NSString *)path
+- (id)initWithContentsOfPath:(NSString *)path error:(NSError **)outError
 {
     if (!(self = [super init])) return nil;
     UInt32 size,maxPacketSize;
@@ -128,13 +139,14 @@ static void BufferCallback(void *inUserData,AudioQueueRef inAQ,
     return 0;//0代表正常的退出
 }
 
-#pragma mark - 
+#pragma mark - audio operation
 - (void)start
 {
     Float32 gain = 1.0;
     AudioQueueSetParameter(queue, kAudioQueueParam_Volume, gain);
     AudioQueueStart(queue, nil);
 }
+
 - (void)pause
 {
     

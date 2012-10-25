@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "TBAudioPlayer.h"
 
 @interface ViewController ()
 
@@ -14,6 +15,7 @@
 
 @implementation ViewController
 
+@synthesize audioPlayer = _audioPlayer;
 @synthesize audio = _audio;
 @synthesize audioTableView = _audioTableView;
 
@@ -31,10 +33,20 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(pause)];
+    
     self.navigationItem.title = @"铃声";
-    //不能播放wav文件
-    self.audio= [[AudioStreamer alloc]initWithAudioPath:[[NSBundle mainBundle] pathForResource:@"kaibulekou" ofType:@"mp3"]];
-    [self.audio start];
+
+//    //不能播放wav文件
+//    self.audio= [[AudioStreamer alloc]initWithContentsOfPath:[[NSBundle mainBundle] pathForResource:@"kaibulekou" ofType:@"mp3"] error:nil];
+//
+//    [self.audio start];
+    self.audioPlayer = [[TBAudioPlayer alloc] initWithContentsOfPath:[[NSBundle mainBundle] pathForResource:@"kaibulekou" ofType:@"mp3"] error:nil];
+    [self.audioPlayer play];
+    
+    
+    
     self.audioTableView = [[AudioTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     self.audioTableView.audioDelegate = self;
     
@@ -57,6 +69,11 @@
 - (void)AudioTableViewDelegate:(AudioTableView *)tableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%i",indexPath.row);
+}
+
+- (void)pause
+{
+    [self.audioPlayer pause];
 }
 
 
