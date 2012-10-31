@@ -9,18 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "AudioStreamer.h"
 #import "AudioTableView.h"
-#import "TBAudioPlayer.h"
+#import "AudioPlayer.h"
 
 @interface ViewController : UIViewController<AudioTableViewDelegate>
 {
-    TBAudioPlayer *_audioPlayer;
+    AudioPlayer *_audioPlayer;
     
     AudioStreamer *_audio;
     AudioTableView *_audioTableView;
 }
 
-@property (nonatomic,retain) TBAudioPlayer *audioPlayer;
+@property (nonatomic,retain) AudioPlayer *audioPlayer;
 @property (nonatomic, retain) AudioStreamer *audio;
 @property (nonatomic,retain) AudioTableView *audioTableView;
+
+- (NSArray *)artworksForFileAtPath:(NSString *)path;
 
 @end

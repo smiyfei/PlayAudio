@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D53097F1638E1440083F60C /* TBAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D53097E1638E1440083F60C /* TBAudioPlayer.m */; };
-		1D5309821638E33D0083F60C /* TBAudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5309811638E33D0083F60C /* TBAudioStreamer.m */; };
-		1D5309851638E4350083F60C /* TBAudioErrorConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5309841638E4350083F60C /* TBAudioErrorConverter.m */; };
+		1D53097F1638E1440083F60C /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D53097E1638E1440083F60C /* AudioPlayer.m */; };
+		1D5309821638E33D0083F60C /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5309811638E33D0083F60C /* AudioStreamer.m */; };
 		1D53099016392FA20083F60C /* AudioParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D53098F16392FA20083F60C /* AudioParam.m */; };
 		1D53099E163948C30083F60C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D53099D163948C30083F60C /* CFNetwork.framework */; };
 		1D54518C1640C3B3001093BA /* lmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D54518A1640C3B3001093BA /* lmp3lame.a */; };
 		1D54518D1640C3B3001093BA /* lmp3lame.la in Resources */ = {isa = PBXBuildFile; fileRef = 1D54518B1640C3B3001093BA /* lmp3lame.la */; };
+		1D64AA3F164103E600E03489 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D64AA3E164103E600E03489 /* AVFoundation.framework */; };
 		1DAFC6B61637F265007C9988 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B51637F265007C9988 /* UIKit.framework */; };
 		1DAFC6B81637F265007C9988 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B71637F265007C9988 /* Foundation.framework */; };
 		1DAFC6BA1637F265007C9988 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B91637F265007C9988 /* CoreGraphics.framework */; };
@@ -24,28 +24,29 @@
 		1DAFC6CA1637F265007C9988 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6C91637F265007C9988 /* Default@2x.png */; };
 		1DAFC6CC1637F265007C9988 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6CB1637F265007C9988 /* Default-568h@2x.png */; };
 		1DAFC6CF1637F265007C9988 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6CE1637F265007C9988 /* ViewController.m */; };
-		1DAFC6D21637F265007C9988 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6D01637F265007C9988 /* ViewController.xib */; };
 		1DAFC6DC1637F37D007C9988 /* AudioTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6DB1637F37D007C9988 /* AudioTableView.m */; };
 		1DAFC6DF1637F397007C9988 /* AudioTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6DE1637F397007C9988 /* AudioTableViewCell.m */; };
 		1DAFC6E11637F692007C9988 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6E01637F692007C9988 /* AudioToolbox.framework */; };
 		1DAFC6E31637F69A007C9988 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6E21637F69A007C9988 /* MediaPlayer.framework */; };
-		1DAFC6E41637F6D5007C9988 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DAFC6D91637F33F007C9988 /* AudioStreamer.m */; };
 		1DAFC6E61637F778007C9988 /* kaibulekou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6E51637F778007C9988 /* kaibulekou.mp3 */; };
+		1DD21CFD1641176000968AD4 /* AudioTrim.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD21CFC1641176000968AD4 /* AudioTrim.m */; };
+		1DD21D001641220700968AD4 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD21CFF1641220700968AD4 /* CoreMIDI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D53097D1638E1440083F60C /* TBAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAudioPlayer.h; sourceTree = "<group>"; };
-		1D53097E1638E1440083F60C /* TBAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAudioPlayer.m; sourceTree = "<group>"; };
-		1D5309801638E33D0083F60C /* TBAudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAudioStreamer.h; sourceTree = "<group>"; };
-		1D5309811638E33D0083F60C /* TBAudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAudioStreamer.m; sourceTree = "<group>"; };
-		1D5309831638E4350083F60C /* TBAudioErrorConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBAudioErrorConverter.h; sourceTree = "<group>"; };
-		1D5309841638E4350083F60C /* TBAudioErrorConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBAudioErrorConverter.m; sourceTree = "<group>"; };
+		1D53097D1638E1440083F60C /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		1D53097E1638E1440083F60C /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
+		1D5309801638E33D0083F60C /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
+		1D5309811638E33D0083F60C /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
 		1D53098E16392FA20083F60C /* AudioParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioParam.h; sourceTree = "<group>"; };
 		1D53098F16392FA20083F60C /* AudioParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioParam.m; sourceTree = "<group>"; };
 		1D53099D163948C30083F60C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1D5451891640C3B3001093BA /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		1D54518A1640C3B3001093BA /* lmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = lmp3lame.a; sourceTree = "<group>"; };
 		1D54518B1640C3B3001093BA /* lmp3lame.la */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lmp3lame.la; sourceTree = "<group>"; };
+		1D64A6A11640CCB500E03489 /* AudioWebStreamer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioWebStreamer.h; sourceTree = "<group>"; };
+		1D64A6A21640CCB500E03489 /* AudioWebStreamer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioWebStreamer.m; sourceTree = "<group>"; };
+		1D64AA3E164103E600E03489 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1DAFC6B11637F265007C9988 /* PlayAudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayAudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DAFC6B51637F265007C9988 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1DAFC6B71637F265007C9988 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,9 +62,6 @@
 		1DAFC6CB1637F265007C9988 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1DAFC6CD1637F265007C9988 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1DAFC6CE1637F265007C9988 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		1DAFC6D11637F265007C9988 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		1DAFC6D81637F33F007C9988 /* AudioStreamer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
-		1DAFC6D91637F33F007C9988 /* AudioStreamer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
 		1DAFC6DA1637F37D007C9988 /* AudioTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTableView.h; sourceTree = "<group>"; };
 		1DAFC6DB1637F37D007C9988 /* AudioTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioTableView.m; sourceTree = "<group>"; };
 		1DAFC6DD1637F397007C9988 /* AudioTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTableViewCell.h; sourceTree = "<group>"; };
@@ -71,6 +69,9 @@
 		1DAFC6E01637F692007C9988 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1DAFC6E21637F69A007C9988 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		1DAFC6E51637F778007C9988 /* kaibulekou.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kaibulekou.mp3; sourceTree = "<group>"; };
+		1DD21CFB1641176000968AD4 /* AudioTrim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTrim.h; sourceTree = "<group>"; };
+		1DD21CFC1641176000968AD4 /* AudioTrim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioTrim.m; sourceTree = "<group>"; };
+		1DD21CFF1641220700968AD4 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DD21D001641220700968AD4 /* CoreMIDI.framework in Frameworks */,
+				1D64AA3F164103E600E03489 /* AVFoundation.framework in Frameworks */,
 				1D53099E163948C30083F60C /* CFNetwork.framework in Frameworks */,
 				1DAFC6E31637F69A007C9988 /* MediaPlayer.framework in Frameworks */,
 				1DAFC6E11637F692007C9988 /* AudioToolbox.framework in Frameworks */,
@@ -94,14 +97,14 @@
 		1D5309781638E0810083F60C /* AudioPlay */ = {
 			isa = PBXGroup;
 			children = (
-				1D53097D1638E1440083F60C /* TBAudioPlayer.h */,
-				1D53097E1638E1440083F60C /* TBAudioPlayer.m */,
+				1D53097D1638E1440083F60C /* AudioPlayer.h */,
+				1D53097E1638E1440083F60C /* AudioPlayer.m */,
 				1D53098E16392FA20083F60C /* AudioParam.h */,
 				1D53098F16392FA20083F60C /* AudioParam.m */,
-				1D5309801638E33D0083F60C /* TBAudioStreamer.h */,
-				1D5309811638E33D0083F60C /* TBAudioStreamer.m */,
-				1D5309831638E4350083F60C /* TBAudioErrorConverter.h */,
-				1D5309841638E4350083F60C /* TBAudioErrorConverter.m */,
+				1D5309801638E33D0083F60C /* AudioStreamer.h */,
+				1D5309811638E33D0083F60C /* AudioStreamer.m */,
+				1D64A6A11640CCB500E03489 /* AudioWebStreamer.h */,
+				1D64A6A21640CCB500E03489 /* AudioWebStreamer.m */,
 			);
 			name = AudioPlay;
 			sourceTree = "<group>";
@@ -114,6 +117,28 @@
 				1D54518B1640C3B3001093BA /* lmp3lame.la */,
 			);
 			path = lame;
+			sourceTree = "<group>";
+		};
+		1D5451901640C899001093BA /* AudioTrim */ = {
+			isa = PBXGroup;
+			children = (
+				1DD21CFB1641176000968AD4 /* AudioTrim.h */,
+				1DD21CFC1641176000968AD4 /* AudioTrim.m */,
+			);
+			name = AudioTrim;
+			sourceTree = "<group>";
+		};
+		1D5451961640CAEC001093BA /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				1DAFC6CD1637F265007C9988 /* ViewController.h */,
+				1DAFC6CE1637F265007C9988 /* ViewController.m */,
+				1DAFC6DA1637F37D007C9988 /* AudioTableView.h */,
+				1DAFC6DB1637F37D007C9988 /* AudioTableView.m */,
+				1DAFC6DD1637F397007C9988 /* AudioTableViewCell.h */,
+				1DAFC6DE1637F397007C9988 /* AudioTableViewCell.m */,
+			);
+			name = Audio;
 			sourceTree = "<group>";
 		};
 		1DAFC6A61637F264007C9988 = {
@@ -136,6 +161,8 @@
 		1DAFC6B41637F265007C9988 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1DD21CFF1641220700968AD4 /* CoreMIDI.framework */,
+				1D64AA3E164103E600E03489 /* AVFoundation.framework */,
 				1D53099D163948C30083F60C /* CFNetwork.framework */,
 				1DAFC6E21637F69A007C9988 /* MediaPlayer.framework */,
 				1DAFC6E01637F692007C9988 /* AudioToolbox.framework */,
@@ -149,19 +176,12 @@
 		1DAFC6BB1637F265007C9988 /* PlayAudio */ = {
 			isa = PBXGroup;
 			children = (
+				1D5451961640CAEC001093BA /* Audio */,
+				1D5451901640C899001093BA /* AudioTrim */,
 				1D5451881640C3B3001093BA /* lame */,
 				1D5309781638E0810083F60C /* AudioPlay */,
-				1DAFC6D81637F33F007C9988 /* AudioStreamer.h */,
-				1DAFC6D91637F33F007C9988 /* AudioStreamer.m */,
 				1DAFC6C41637F265007C9988 /* AppDelegate.h */,
 				1DAFC6C51637F265007C9988 /* AppDelegate.m */,
-				1DAFC6CD1637F265007C9988 /* ViewController.h */,
-				1DAFC6CE1637F265007C9988 /* ViewController.m */,
-				1DAFC6DA1637F37D007C9988 /* AudioTableView.h */,
-				1DAFC6DB1637F37D007C9988 /* AudioTableView.m */,
-				1DAFC6DD1637F397007C9988 /* AudioTableViewCell.h */,
-				1DAFC6DE1637F397007C9988 /* AudioTableViewCell.m */,
-				1DAFC6D01637F265007C9988 /* ViewController.xib */,
 				1DAFC6BC1637F265007C9988 /* Supporting Files */,
 			);
 			path = PlayAudio;
@@ -237,7 +257,6 @@
 				1DAFC6C81637F265007C9988 /* Default.png in Resources */,
 				1DAFC6CA1637F265007C9988 /* Default@2x.png in Resources */,
 				1DAFC6CC1637F265007C9988 /* Default-568h@2x.png in Resources */,
-				1DAFC6D21637F265007C9988 /* ViewController.xib in Resources */,
 				1DAFC6E61637F778007C9988 /* kaibulekou.mp3 in Resources */,
 				1D54518D1640C3B3001093BA /* lmp3lame.la in Resources */,
 			);
@@ -250,16 +269,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DAFC6E41637F6D5007C9988 /* AudioStreamer.m in Sources */,
 				1DAFC6C21637F265007C9988 /* main.m in Sources */,
 				1DAFC6C61637F265007C9988 /* AppDelegate.m in Sources */,
 				1DAFC6CF1637F265007C9988 /* ViewController.m in Sources */,
 				1DAFC6DC1637F37D007C9988 /* AudioTableView.m in Sources */,
 				1DAFC6DF1637F397007C9988 /* AudioTableViewCell.m in Sources */,
-				1D53097F1638E1440083F60C /* TBAudioPlayer.m in Sources */,
-				1D5309821638E33D0083F60C /* TBAudioStreamer.m in Sources */,
-				1D5309851638E4350083F60C /* TBAudioErrorConverter.m in Sources */,
+				1D53097F1638E1440083F60C /* AudioPlayer.m in Sources */,
+				1D5309821638E33D0083F60C /* AudioStreamer.m in Sources */,
 				1D53099016392FA20083F60C /* AudioParam.m in Sources */,
+				1DD21CFD1641176000968AD4 /* AudioTrim.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,14 +290,6 @@
 				1DAFC6BF1637F265007C9988 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		1DAFC6D01637F265007C9988 /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1DAFC6D11637F265007C9988 /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -335,6 +345,10 @@
 		1DAFC6D61637F265007C9988 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Downloads\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayAudio/PlayAudio-Prefix.pch";
 				INFOPLIST_FILE = "PlayAudio/PlayAudio-Info.plist";
@@ -350,6 +364,10 @@
 		1DAFC6D71637F265007C9988 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Downloads\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayAudio/PlayAudio-Prefix.pch";
 				INFOPLIST_FILE = "PlayAudio/PlayAudio-Info.plist";
