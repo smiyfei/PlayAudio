@@ -2,4 +2,19 @@
 <Bucket
    type = "1"
    version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PlayAudio/AudioStreamer.m"
+         timestampString = "373434890.096837"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "@interface AudioStreamer()"
+         landmarkType = "2">
+      </FileBreakpoint>
+   </FileBreakpoints>
 </Bucket>

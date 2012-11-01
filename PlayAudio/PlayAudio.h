@@ -10,4 +10,17 @@
 
 @protocol PlayAudio <NSObject>
 
+- (void)start;
+- (void)stop;
+- (void)pause;
+- (BOOL)isFinishing;
+- (BOOL)isPlaying;
+- (BOOL)isPaused;
+- (BOOL)isWaiting;
+- (BOOL)isIdle;
+- (void)seekToTime:(double)newSeekTime;
+- (double)calculatedBitRate;
+- (NSString *)currentTime;
+- (NSString *)totalTime;
+
 @end

@@ -1,10 +1,9 @@
-
 #if TARGET_OS_IPHONE			
 #import <UIKit/UIKit.h>
 #else
 #import <Cocoa/Cocoa.h>
-#endif
-#import "PlayAudio.h"
+#endif // TARGET_OS_IPHONE
+
 #include <pthread.h>
 #include <AudioToolbox/AudioToolbox.h>
 
@@ -37,15 +36,15 @@
 typedef enum
 {
 	AS_INITIALIZED = 0,
-	AS_STARTING_FILE_THREAD = 1,          // 启动线程
-	AS_WAITING_FOR_DATA = 2,              // 准备数据
-	AS_FLUSHING_EOF = 3,                  // 数据准备完毕
-	AS_WAITING_FOR_QUEUE_TO_START = 4,    // 排队播放
-	AS_PLAYING = 5,                       // 正在播放
-	AS_BUFFERING = 6,                     // 网络不好,自动缓冲
-	AS_PAUSED = 7,                        // 手动暂停    
-	AS_STOPPING = 8,                      // 即将停止,自动提醒
-	AS_STOPPED = 9,                       // 已停止播放
+	AS_STARTING_FILE_THREAD,
+	AS_WAITING_FOR_DATA,
+	AS_FLUSHING_EOF,
+	AS_WAITING_FOR_QUEUE_TO_START,
+	AS_PLAYING,
+	AS_BUFFERING,
+	AS_STOPPING,
+	AS_STOPPED,
+	AS_PAUSED
 } AudioStreamerState;
 
 typedef enum
@@ -84,18 +83,14 @@ typedef enum
 } AudioStreamerErrorCode;
 
 extern NSString * const ASStatusChangedNotification;
-extern AudioStreamerErrorCode * errorCode;
 
-
-//播放在线音频
-@interface AudioStreamer : NSObject<PlayAudio>
+@interface AudioStreamer : NSObject
 {
 	NSURL *url;
-	//
-	//  Special threading consideration:
+
+	// Special threading consideration:
 	//	The audioQueue property should only ever be accessed inside a
 	//	synchronized(self) block and only *after* checking that ![self isFinishing]
-	//
 	AudioQueueRef audioQueue;
 	AudioFileStreamID audioFileStream;	// the audio file stream parser
 	AudioStreamBasicDescription asbd;	// description of the audio
@@ -111,11 +106,11 @@ extern AudioStreamerErrorCode * errorCode;
 	bool inuse[kNumAQBufs];			// flags to indicate that a buffer is still in use
 	NSInteger buffersUsed;
 	NSDictionary *httpHeaders;
+	NSString *fileExtension;
 	
 	AudioStreamerState state;
 	AudioStreamerStopReason stopReason;
 	AudioStreamerErrorCode errorCode;
-    
 	OSStatus err;
 	
 	bool discontinuous;			// flag to indicate middle of the stream
@@ -156,10 +151,25 @@ extern AudioStreamerErrorCode * errorCode;
 @property (readonly) double duration;
 @property (readwrite) UInt32 bitRate;
 @property (readonly) NSDictionary *httpHeaders;
+@property (copy,readwrite) NSString *fileExtension;
 
 - (id)initWithURL:(NSURL *)aURL;
+- (void)start;
+- (void)stop;
+- (void)pause;
+- (BOOL)isPlaying;
+- (BOOL)isPaused;
+- (BOOL)isWaiting;
+- (BOOL)isIdle;
+- (void)seekToTime:(double)newSeekTime;
+- (double)calculatedBitRate;
+- (AudioQueueRef)createQueue;
+
 @end
 
+@protocol AudioStreamerDelegate <NSObject>
+
+@end
 
 
 

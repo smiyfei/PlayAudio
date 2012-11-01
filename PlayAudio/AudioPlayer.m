@@ -6,46 +6,28 @@
 //  Copyright (c) 2012 self. All rights reserved.
 //
 
+#import "PlayLocal.h"
+#import "PlayAudio.h"
 #import "AudioPlayer.h"
 #import "AudioStreamer.h"
-#import "AudioParam.h"
-
-
 
 @implementation AudioPlayer
 
+@synthesize localPlayer = _localPlayer;
 @synthesize streamer = _streamer;
-@synthesize webStreamer = _webStreamer;
-@synthesize state;
 @synthesize seekTime;
 @synthesize progress;
-
-- (id)initWithContentsOfPath:(NSString *)path error:(NSError **)outError
-{
-    if(self == [super init])
-    {
-        self.state = AS_INITIALIZED;//状态初始化
-        self.streamer = [[AudioStreamer alloc] initWithContentsOfPath:path error:nil];
-        audioQueue = [self.streamer createQueue];//获取本地播放音频队列
-    }
-    
-    return self;
-}
 
 - (id)initwithcontentsOFURL:(NSURL *)url error:(NSError **)outError
 {
     if (self == [super init]) {
-        self.state = AS_INITIALIZED;
-        self.webStreamer = [[AudioWebStreamer alloc] initWithURL:url];
-        if (audioQueue != nil) {
-            err = AudioQueueStop(audioQueue, true);
-            if (err) {
-                NSLog(@"can't stop audio queue");
-                return nil;
-            }
+        if ([url isFileURL]) {
+            playAudio = [[PlayLocal alloc] initWithURL:url error:nil];
         }
-        audioQueue = [self.webStreamer start];
-
+        else
+        {
+            playAudio = [[AudioStreamer alloc] initWithURL:url];
+        }
     }
     
     return self;
@@ -54,102 +36,46 @@
 - (void)dealloc
 {
     [_streamer release];
-    [_webStreamer release];
+    [_localPlayer release];
     [super dealloc];
 }
 
-
-//- (BOOL)play
-//{
-//    @synchronized (self)
+- (BOOL)play
+{
+    if (!playAudio) {
+//        self.streamer = [[AudioStreamer alloc] initWithURL:self.url];
+        // set up display updater
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:
+                                    [self methodSignatureForSelector:@selector(updateProgress)]];
+        [invocation setSelector:@selector(updateProgress)];
+        [invocation setTarget:self];
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                             invocation:invocation
+                                                repeats:YES];
+        
+        // register the streamer on notification
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(playbackStateChanged:)
+                                                     name:ASStatusChangedNotification
+                                                   object:playAudio];
+    }
+    
+//    if ([playAudio isPlaying])
 //    {
-//        if(state == AS_PAUSED)
-//        {
-//            [self pause];
-//        }
-//        else
-//        {
-//            if(state == AS_INITIALIZED)
-//            {
-//                NSAssert([[NSThread currentThread] isEqual:[NSThread mainThread]], @"Playback can only be started from the main thread.");
-//                notificationCenter = [[NSNotificationCenter defaultCenter] retain];
-////                audioQueue = [_streamer startInterval];
-//                Float32 gain = 1.0;
-//                //音量设置
-//                AudioQueueSetParameter(audioQueue, kAudioQueueParam_Volume, gain);
-//                AudioQueueStart(audioQueue, nil);
-//                self.state = AS_PLAYING;
-//            }
-//        }
+//        [playAudio stop];
 //    }
-//    
-//    
-//    return YES;
-//}
-//
-//- (void)pause
-//{
-//    @synchronized(self)
+//    else
 //    {
-//        if(self.state == AS_PLAYING)
-//        {
-//            err = AudioQueuePause(audioQueue);
-//            if(err)
-//            {
-//                NSLog(@"%@",@"AS_AUDIO_QUEUE_PAUSE_FAILED");
-//                return;
-//            }
-//            self.state = AS_PAUSED;
-//        }
-//        else if(self.state == AS_PAUSED)
-//        {
-//            err = AudioQueueStart(audioQueue, NULL);
-//            if(err)
-//            {
-//                NSLog(@"%@",@"AS_AUDIO_QUEUE_START_FAILED");
-//                return;
-//            }
-//            self.state = AS_PLAYING;
-//        }
+        [playAudio start];
 //    }
-//}
-//
-//- (void)stop
-//{
-//    @synchronized(self)
-//	{
-//		if (audioQueue &&
-//			(state == AS_PLAYING || state == AS_PAUSED ||
-//             state == AS_BUFFERING || state == AS_WAITING_FOR_QUEUE_TO_START))
-//		{
-//			self.state = AS_STOPPING;
-////			stopReason = AS_STOPPING_USER_ACTION;
-//			err = AudioQueueStop(audioQueue, true);
-//			if (err)
-//			{
-////				[self failWithErrorCode:AS_AUDIO_QUEUE_STOP_FAILED];
-//                NSLog(@"%@",@"AS_AUDIO_QUEUE_STOP_FAILED");
-//				return;
-//			}
-//		}
-//		else if (state != AS_INITIALIZED)
-//		{
-//			self.state = AS_STOPPED;
-////			stopReason = AS_STOPPING_USER_ACTION;
-//		}
-////		seekWasRequested = NO;
-//	}
-//	
-//	while (state != AS_INITIALIZED)
-//	{
-//		[NSThread sleepForTimeInterval:0.1];
-//	}
-//
-//}
+    
+    return true;
+}
 
 - (double)progress
 {
-
+    
 }
 
 - (BOOL)isFinishing
