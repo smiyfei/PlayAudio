@@ -11,17 +11,23 @@
 #import "AudioPlayer.h"
 #import "AudioStreamer.h"
 
+#define IS_LOCAL TRUE //定义默认本地播放
+
 @implementation AudioPlayer
 
-@synthesize localPlayer = _localPlayer;
-@synthesize streamer = _streamer;
 @synthesize seekTime;
 @synthesize progress;
 
 - (id)initwithcontentsOFURL:(NSURL *)url error:(NSError **)outError
 {
-    if (self == [super init]) {
-        if ([url isFileURL]) {
+    if (self == [super init])
+    {
+        if (nil != playAudio) {
+            [playAudio stop];
+            [playAudio release];
+        }
+        if ([url isFileURL])
+        {
             playAudio = [[PlayLocal alloc] initWithURL:url error:nil];
         }
         else
@@ -35,63 +41,49 @@
 
 - (void)dealloc
 {
-    [_streamer release];
-    [_localPlayer release];
+    [playAudio release];
     [super dealloc];
 }
 
 - (BOOL)play
 {
-    if (!playAudio) {
-//        self.streamer = [[AudioStreamer alloc] initWithURL:self.url];
-        // set up display updater
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:
-                                    [self methodSignatureForSelector:@selector(updateProgress)]];
-        [invocation setSelector:@selector(updateProgress)];
-        [invocation setTarget:self];
-        
-        timer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                             invocation:invocation
-                                                repeats:YES];
-        
-        // register the streamer on notification
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(playbackStateChanged:)
-                                                     name:ASStatusChangedNotification
-                                                   object:playAudio];
+    if ([playAudio isPlaying])
+    {
+        [playAudio stop];
     }
-    
-//    if ([playAudio isPlaying])
-//    {
-//        [playAudio stop];
-//    }
-//    else
-//    {
+    else
+    {
         [playAudio start];
-//    }
+    }
     
     return true;
 }
 
-- (double)progress
+- (void)pause
 {
-    
+    if (!playAudio)
+    {
+        [playAudio pause];
+    }
 }
 
-- (BOOL)isFinishing
+- (void)stop
 {
-    
-}
-
-
-- (double)duration
-{
-    
+    if (nil != playAudio)
+    {
+        [playAudio stop];
+        
+    }
 }
 
 - (void)seekToTime:(double)newSeekTime
 {
-    
+    if (nil != playAudio) {
+        [self stop];
+        [playAudio seekToTime:newSeekTime];
+    }
 }
+
+
 
 @end

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1D28D07916425EF100F3C2B0 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D28D0701642508800F3C2B0 /* AudioStreamer.m */; };
 		1D28D0871642624700F3C2B0 /* PlayLocal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5309811638E33D0083F60C /* PlayLocal.m */; };
+		1D359AEB1648E06400821F76 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D359AEA1648E06400821F76 /* CoreMedia.framework */; };
+		1D359AEC1648E58800821F76 /* AudioTrim.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD21CFC1641176000968AD4 /* AudioTrim.m */; };
 		1D53097F1638E1440083F60C /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D53097E1638E1440083F60C /* AudioPlayer.m */; };
 		1D53099016392FA20083F60C /* AudioParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D53098F16392FA20083F60C /* AudioParam.m */; };
 		1D53099E163948C30083F60C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D53099D163948C30083F60C /* CFNetwork.framework */; };
@@ -30,13 +32,13 @@
 		1DAFC6E11637F692007C9988 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6E01637F692007C9988 /* AudioToolbox.framework */; };
 		1DAFC6E31637F69A007C9988 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6E21637F69A007C9988 /* MediaPlayer.framework */; };
 		1DAFC6E61637F778007C9988 /* kaibulekou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1DAFC6E51637F778007C9988 /* kaibulekou.mp3 */; };
-		1DD21CFD1641176000968AD4 /* AudioTrim.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD21CFC1641176000968AD4 /* AudioTrim.m */; };
 		1DD21D001641220700968AD4 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD21CFF1641220700968AD4 /* CoreMIDI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D28D06F1642508800F3C2B0 /* AudioStreamer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
 		1D28D0701642508800F3C2B0 /* AudioStreamer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
+		1D359AEA1648E06400821F76 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		1D503C9516426D450030C6EC /* PlayAudio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayAudio.h; sourceTree = "<group>"; };
 		1D53097D1638E1440083F60C /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
 		1D53097E1638E1440083F60C /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D359AEB1648E06400821F76 /* CoreMedia.framework in Frameworks */,
 				1DD21D001641220700968AD4 /* CoreMIDI.framework in Frameworks */,
 				1D64AA3F164103E600E03489 /* AVFoundation.framework in Frameworks */,
 				1D53099E163948C30083F60C /* CFNetwork.framework in Frameworks */,
@@ -164,6 +167,7 @@
 		1DAFC6B41637F265007C9988 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D359AEA1648E06400821F76 /* CoreMedia.framework */,
 				1DD21CFF1641220700968AD4 /* CoreMIDI.framework */,
 				1D64AA3E164103E600E03489 /* AVFoundation.framework */,
 				1D53099D163948C30083F60C /* CFNetwork.framework */,
@@ -272,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D359AEC1648E58800821F76 /* AudioTrim.m in Sources */,
 				1D28D0871642624700F3C2B0 /* PlayLocal.m in Sources */,
 				1D28D07916425EF100F3C2B0 /* AudioStreamer.m in Sources */,
 				1DAFC6C21637F265007C9988 /* main.m in Sources */,
@@ -281,7 +286,6 @@
 				1DAFC6DF1637F397007C9988 /* AudioTableViewCell.m in Sources */,
 				1D53097F1638E1440083F60C /* AudioPlayer.m in Sources */,
 				1D53099016392FA20083F60C /* AudioParam.m in Sources */,
-				1DD21CFD1641176000968AD4 /* AudioTrim.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

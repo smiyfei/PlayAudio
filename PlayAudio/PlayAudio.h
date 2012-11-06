@@ -20,7 +20,7 @@
 - (BOOL)isIdle;
 - (void)seekToTime:(double)newSeekTime;
 - (double)calculatedBitRate;
-- (NSString *)currentTime;
-- (NSString *)totalTime;
+- (float)currentTime;
+- (float)duration;
 
 @end

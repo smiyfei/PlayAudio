@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AudioTableView.h"
+
 @class AudioPlayer;
 
-@interface ViewController : UIViewController<AudioTableViewDelegate>
+@interface ViewController : UIViewController
 
 @property (nonatomic,retain) AudioPlayer *audioPlayer;
-@property (nonatomic,retain) AudioTableView *audioTableView;
 
 - (NSArray *)artworksForFileAtPath:(NSString *)path;
 

@@ -17,15 +17,6 @@
 @synthesize duration;
 @synthesize artwork;
 
-- (id)init
-{
-    if (self == [super init]) {
-        
-    }
-    
-    return self;
-}
-
 - (void)dealloc
 {
     [title release];
@@ -38,7 +29,6 @@
 
 - (NSMutableDictionary *)audioParamWithAudioPath:(NSString *)path
 {
-//    NSURL *fileURL=[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"kaibulekou" ofType:@"mp3"]];
     NSURL *fileURL = [NSURL fileURLWithPath:path];
     NSString *fileExtension = [[fileURL path] pathExtension];
     NSMutableDictionary *piDict = nil;
@@ -73,15 +63,6 @@
 
 - (NSArray *)artworksForFileAtPath:(NSString *)path
 {
-    //    NSArray *artworkImages = [self artworksForFileAtPath:@"/Users/comtongbu/Downloads/149508041351105261.mp3"];
-    //    for (UIImage *image in artworkImages)
-    //    {
-    //        NSData *imgData = UIImageJPEGRepresentation(image, 0.8);
-    //        if (imgData) {
-    //            imgData = UIImagePNGRepresentation(image);
-    //        }
-    //        [imgData writeToFile:@"/Users/comtongbu/Desktop/test.jpg" atomically:YES];
-    //    }
     NSMutableArray *artworkImages = [NSMutableArray array];
     NSURL *u = [NSURL fileURLWithPath:path];
     AVURLAsset *a = [AVURLAsset URLAssetWithURL:u options:nil];
@@ -97,12 +78,16 @@
         {
             NSDictionary *d = [i.value copyWithZone:nil];
             im = [UIImage imageWithData:[d objectForKey:@"data"]];
+            [d release];
         }
         else if ([keySpace isEqualToString:AVMetadataKeySpaceiTunes])
+        {
             im = [UIImage imageWithData:[i.value copyWithZone:nil]];
-        
+        }
         if (im)
+        {
             [artworkImages addObject:im];
+        }
     }
     
     NSLog(@"array description is %@", [artworkImages description]);

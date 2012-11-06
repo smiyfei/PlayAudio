@@ -924,11 +924,77 @@ cleanup:
 //
 - (void)seekToTime:(double)newSeekTime
 {
-	@synchronized(self)
+    if ([self calculatedBitRate] == 0.0 || fileLength <= 0)
 	{
-		seekWasRequested = YES;
-		requestedSeekTime = newSeekTime;
+		return;
 	}
+	
+	//
+	// Calculate the byte offset for seeking
+	//
+	seekByteOffset = dataOffset +
+    (newSeekTime / self.duration) * (fileLength - dataOffset);
+    
+	//
+	// Attempt to leave 1 useful packet at the end of the file (although in
+	// reality, this may still seek too far if the file has a long trailer).
+	//
+	if (seekByteOffset > fileLength - 2 * packetBufferSize)
+	{
+		seekByteOffset = fileLength - 2 * packetBufferSize;
+	}
+	
+	//
+	// Store the old time from the audio queue and the time that we're seeking
+	// to so that we'll know the correct time progress after seeking.
+	//
+	seekTime = newSeekTime;
+	
+	//
+	// Attempt to align the seek with a packet boundary
+	//
+	double calculatedBitRate = [self calculatedBitRate];
+	if (packetDuration > 0 &&
+		calculatedBitRate > 0)
+	{
+		UInt32 ioFlags = 0;
+		SInt64 packetAlignedByteOffset;
+		SInt64 seekPacket = floor(newSeekTime / packetDuration);
+		err = AudioFileStreamSeek(audioFileStream, seekPacket, &packetAlignedByteOffset, &ioFlags);
+		if (!err && !(ioFlags & kAudioFileStreamSeekFlag_OffsetIsEstimated))
+		{
+			seekTime -= ((seekByteOffset - dataOffset) - packetAlignedByteOffset) * 8.0 / calculatedBitRate;
+			seekByteOffset = packetAlignedByteOffset + dataOffset;
+		}
+	}
+    
+	//
+	// Close the current read straem
+	//
+	if (stream)
+	{
+		CFReadStreamClose(stream);
+		CFRelease(stream);
+		stream = nil;
+	}
+    
+	//
+	// Stop the audio queue
+	//
+	self.state = AS_STOPPING;
+	stopReason = AS_STOPPING_TEMPORARILY;
+	err = AudioQueueStop(audioQueue, true);
+	if (err)
+	{
+		[self failWithErrorCode:AS_AUDIO_QUEUE_STOP_FAILED];
+		return;
+	}
+    
+	//
+	// Re-open the file stream. It will request a byte-range starting at
+	// seekByteOffset.
+	//
+	[self openReadStream];
 }
 
 //
@@ -1046,7 +1112,7 @@ cleanup:
 	{
 		if (state == AS_PAUSED)
 		{
-			[self pause]; // will resume the player
+			[self pause]; // 恢复播放
 		}
 		else if (state == AS_INITIALIZED)
 		{
@@ -1063,17 +1129,12 @@ cleanup:
 		}
         else if (state == AS_PLAYING)
         {
-            // do nothing
+            
         }
 	}
 }
 
-
-//
-// pause
-//
-// A togglable pause function between pause and play
-//
+// 暂停，处于暂停状态下播放
 - (void)pause
 {
 	@synchronized(self)

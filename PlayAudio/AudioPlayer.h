@@ -23,8 +23,6 @@
     NSTimer *timer;
 }
 
-@property (nonatomic,retain) PlayLocal *localPlayer;
-@property (nonatomic,retain) AudioStreamer *streamer;
 @property (nonatomic,assign) double seekTime;
 @property (readonly) double progress;
 @property (readonly) double duration;

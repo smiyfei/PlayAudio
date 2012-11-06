@@ -7,10 +7,16 @@
 //
 
 #import "PlayLocal.h"
+#import <AVFoundation/AVAudioPlayer.h>
+#import <AVFoundation/AVPlayerItem.h>
+#import <AVFoundation/AVAsset.h>
 
 static UInt32 gBufferSizeBytes=0x10000;//It muse be pow(2,x)
 
 @interface PlayLocal()
+
+@property (readwrite) PlayLocalState state;
+@property (nonatomic,retain) AVAudioPlayer *audioPlayer;
 
 //定义回调(Callback)函数
 static void BufferCallack(void *inUserData,AudioQueueRef inAQ,
@@ -26,18 +32,8 @@ static void BufferCallack(void *inUserData,AudioQueueRef inAQ,
 
 @synthesize audioPath;
 @synthesize audioURL;
-
-//播放本地文件初始化
-- (id)initWithPath:(NSString *)path error:(NSError **)outError
-{
-    self = [super init];
-    if(self)
-    {
-        audioPath = [path retain];
-    }
-    
-    return self;
-}
+@synthesize state;
+@synthesize audioPlayer;
 
 - (id)initWithURL:(NSURL *)url error:(NSError **)outError
 {
@@ -46,6 +42,7 @@ static void BufferCallack(void *inUserData,AudioQueueRef inAQ,
             url = [NSURL fileURLWithPath:[NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil]];
         }
         audioURL = [url retain];
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
     }
     
     return self;
@@ -54,6 +51,7 @@ static void BufferCallack(void *inUserData,AudioQueueRef inAQ,
 - (void)dealloc
 {
     [audioPath release];
+    [audioPlayer release];
     [super dealloc];
 }
 
@@ -175,63 +173,197 @@ static void BufferCallBack(void *inUserData,AudioQueueRef inAQ,
 
 - (void)start
 {
-    if ([self createQueue])
+    @synchronized(self)
     {
-        Float32 gain = 1.0;
-        AudioQueueSetParameter(audioQueue, kAudioQueueParam_Volume, gain);
-        AudioQueueStart(audioQueue, nil);
+        if (state == PL_PAUSED) {
+            [self pause];
+        }
+        else if (state == PL_INITIALIZED) {
+            if ([self createQueue])
+            {
+                Float32 gain = 1.0;
+                AudioQueueSetParameter(audioQueue, kAudioQueueParam_Volume, gain);
+                AudioQueueStart(audioQueue, nil);
+                state = PL_PLAYING;
+            }
+            else
+            {
+                NSLog(@"create queue failed");
+            }
+        }
+        else if(state == PL_PLAYING)
+        {
+            //do nothing
+        }
     }
-    else
-    {
-        NSLog(@"create queue failed");
-    }
+}
+
+- (void)pause
+{
+    @synchronized(self)
+	{
+		if (state == PL_PLAYING)
+		{
+			err = AudioQueuePause(audioQueue);
+			if (err)
+			{
+                NSLog(@"err:%s","AUDIO_QUEUE_PAUSE_FAILED");
+				return;
+			}
+			self.state = PL_PAUSED;
+		}
+		else if (state == PL_PAUSED)
+		{
+			err = AudioQueueStart(audioQueue, NULL);
+			if (err)
+			{
+                NSLog(@"err:%s","AUDIO_QUEUE_START_FAILED");
+				return;
+			}
+			self.state = PL_PLAYING;
+		}
+	}
 }
 
 - (void)stop
 {
+    @synchronized(self)
+	{
+		
+        if (audioQueue && (state == PL_PLAYING || state == PL_PAUSED))
+		{
+			self.state = PL_STOPPING;
+			stopReason = PL_STOPPING_USER_ACTION;
+			err = AudioQueueStop(audioQueue, true);
+			if (err)
+			{
+                NSLog(@"err:%s","AUDIO_QUEUE_STOP_FAILED");
+				return;
+			}
+		}
+		else if (state != PL_INITIALIZED)
+		{
+			self.state = PL_STOPPED;
+			stopReason = PL_STOPPING_USER_ACTION;
+		}
+		seekWasRequested = NO;
+	}
+}
 
-}
-- (void)pause
-{
-    
-}
 - (BOOL)isFinishing
 {
+    @synchronized (self)
+	{
+		if ((errorCode != PL_NO_ERROR && state != PL_INITIALIZED) ||
+			((state == PL_STOPPING || state == PL_STOPPED) &&
+             stopReason != PL_STOPPING_TEMPORARILY))
+		{
+			return YES;
+		}
+	}
     
-}
-- (BOOL)isPlaying
-{
-    
-}
-- (BOOL)isPaused
-{
-    
-}
-- (BOOL)isWaiting
-{
-    
-}
-- (BOOL)isIdle
-{
-    
-}
-- (void)seekToTime:(double)newSeekTime
-{
-    
-}
-- (double)calculatedBitRate
-{
-    
-}
-- (NSString *)currentTime
-{
-    
-}
-- (NSString *)totalTime
-{
-    
+	return NO;
 }
 
+- (BOOL)isPlaying
+{
+    @synchronized(self)
+    {
+        if(state == PL_PLAYING)
+        {
+            return YES;
+        }
+    
+    return NO;
+}
+}
+
+- (BOOL)isPaused
+{
+    @synchronized(self)
+    {
+        if (state == PL_PAUSED)
+        {
+            return  YES;
+        }
+        
+        return NO;
+    }
+}
+
+//- (BOOL)isWaiting
+//{
+//    @synchronized(self)
+//	{
+//		if (state == PL_STARTING_FILE_THREAD ||
+//			state == PL_WAITING_FOR_DATA ||
+//			state == PL_WAITING_FOR_QUEUE_TO_START ||
+//			state == PL_BUFFERING)
+//		{
+//			return YES;
+//		}
+//	}
+//	
+//	return NO;
+//}
+
+- (void)seekToTime:(double)newSeekTime
+{
+    @synchronized(self)
+    {
+        // Negative values skip to start of file
+        if (newSeekTime<0.0f )
+            newSeekTime = 0.0f;
+        
+        // Rounds down to remove sub-second precision
+        newSeekTime = (int)newSeekTime;
+        
+        // Prevent skipping past end of file
+        if(newSeekTime >= (int)audioPlayer.duration)
+        {
+            NSLog( @"Audio: IGNORING skip to <%.02f> (past EOF) of <%.02f> seconds", newSeekTime, audioPlayer.duration );
+            return;
+        }
+        
+        // See if playback is active prior to skipping
+        BOOL skipWhilePlaying = audioPlayer.playing;
+        
+        // Perform skip
+        NSLog( @"Audio: skip to <%.02f> of <%.02f> seconds", newSeekTime, audioPlayer.duration );
+        
+        // NOTE: This stop,set,prepare,(play) sequence produces reliable results on the simulator and device.
+        [audioPlayer stop];
+        
+        [audioPlayer setCurrentTime:newSeekTime];
+        
+        [audioPlayer prepareToPlay];
+        
+        
+            [audioPlayer play];
+        
+    }
+}
+
+- (float)currentTime
+{
+    if (!audioPlayer) {
+        float currentTime = audioPlayer.currentTime;
+        return currentTime;
+    }
+    
+    return 0.0;
+}
+
+- (float)duration
+{
+    if (!audioPlayer) {
+        float duration = self.audioPlayer.duration;
+        return duration;
+    }
+    
+    return 0.0;
+
+}
 
 
 @end

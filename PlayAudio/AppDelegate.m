@@ -13,13 +13,11 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize viewController = _viewController;
 @synthesize navigationController = _navigationController;
 
 - (void)dealloc
 {
     [_window release];
-    [_viewController release];
     [_navigationController release];
     [super dealloc];
 }
@@ -27,8 +25,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.viewController = [[ViewController alloc] init];
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    ViewController *viewController = [[ViewController alloc] init];
+    _navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [viewController release];
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
