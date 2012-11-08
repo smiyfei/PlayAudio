@@ -15,7 +15,9 @@
 @synthesize artist;
 @synthesize album;
 @synthesize duration;
+@synthesize year;
 @synthesize artwork;
+
 
 - (void)dealloc
 {
@@ -24,7 +26,25 @@
     [album release];
     [duration release];
     [artwork release];
+    [year release];
     [super dealloc];
+}
+
+- (id)initWithAudioPath:(NSString *)path
+{
+    if (self == [super init])
+    {
+        NSMutableDictionary *paramDic = [self audioParamWithAudioPath:path];
+        self.album = [paramDic objectForKey:@"album"];
+        self.artist = [paramDic objectForKey:@"artist"];
+        self.title = [paramDic objectForKey:@"title"];
+        self.year = [paramDic objectForKey:@"year"];
+        self.artwork = [paramDic objectForKey:@"artWorkImages"];
+        self.duration = [paramDic objectForKey:@"approximate duration in seconds"];
+        [paramDic release];
+    }
+    
+    return self;
 }
 
 - (NSMutableDictionary *)audioParamWithAudioPath:(NSString *)path
@@ -37,28 +57,33 @@
         AudioFileID fileID  = nil;
         OSStatus err        = noErr;
         
-        err = AudioFileOpenURL( (CFURLRef) fileURL, kAudioFileReadPermission, 0, &fileID );//open file
-        if( err != noErr ) {
+        err = AudioFileOpenURL( (CFURLRef) fileURL, kAudioFileReadPermission, 0, &fileID );
+        if( err != noErr )
+        {
             NSLog( @"AudioFileOpenURL failed" );
         }
         
         UInt32 id3DataSize  = 0;
         err = AudioFileGetPropertyInfo( fileID,   kAudioFilePropertyID3Tag, &id3DataSize, NULL );
-        if( err != noErr ) {
+        if( err != noErr )
+        {
             NSLog( @"AudioFileGetPropertyInfo failed for ID3 tag" );
         }
-
-        UInt32 piDataSize   = sizeof( piDict );
+        
+        UInt32 piDataSize   = sizeof(piDict);
         err = AudioFileGetProperty( fileID, kAudioFilePropertyInfoDictionary, &piDataSize, &piDict);
-        if( err != noErr ) {
+        if( err != noErr )
+        {
             NSLog( @"AudioFileGetProperty failed for property info dictionary" );
+            return nil;
         }
-
         NSArray *artWorkImages = [self artworksForFileAtPath:path];
-        [piDict setObject:artWorkImages forKey:@"artwork"];
-    }
+        [piDict setObject:artWorkImages forKey:@"artWorkImages"];
 
-    return piDict;
+        return piDict;
+    }
+    
+    return nil;
 }
 
 - (NSArray *)artworksForFileAtPath:(NSString *)path
@@ -90,7 +115,6 @@
         }
     }
     
-    NSLog(@"array description is %@", [artworkImages description]);
     return artworkImages;
     
 }

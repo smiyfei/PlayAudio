@@ -13,20 +13,22 @@
 
 #define IS_LOCAL TRUE //定义默认本地播放
 
+@interface AudioPlayer()
+
+@property (readwrite) State state;
+@end
 @implementation AudioPlayer
 
+@synthesize duration;
 @synthesize seekTime;
 @synthesize progress;
+@synthesize state;
 
 - (id)initwithcontentsOFURL:(NSURL *)url error:(NSError **)outError
 {
     if (self == [super init])
     {
-        if (nil != playAudio) {
-            [playAudio stop];
-            [playAudio release];
-        }
-        if ([url isFileURL])
+        if ([url isFileURL])// url为本地资源
         {
             playAudio = [[PlayLocal alloc] initWithURL:url error:nil];
         }
@@ -35,7 +37,7 @@
             playAudio = [[AudioStreamer alloc] initWithURL:url];
         }
     }
-    
+
     return self;
 }
 
@@ -47,7 +49,7 @@
 
 - (BOOL)play
 {
-    if ([playAudio isPlaying])
+    if ([playAudio state] == PLAYING)
     {
         [playAudio stop];
     }
@@ -61,7 +63,7 @@
 
 - (void)pause
 {
-    if (!playAudio)
+    if (nil != playAudio)
     {
         [playAudio pause];
     }
@@ -81,6 +83,25 @@
     if (nil != playAudio) {
         [self stop];
         [playAudio seekToTime:newSeekTime];
+    }
+}
+
+- (State)state
+{
+    if (nil != playAudio)
+    {
+        return [playAudio state];
+    }
+    
+    return state;
+}
+
+- (void)setState:(State)aState
+{
+    if (nil != playAudio) {
+        if (state != aState) {
+            [playAudio setState:aState];
+        }
     }
 }
 

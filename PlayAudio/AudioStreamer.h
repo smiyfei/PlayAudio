@@ -34,68 +34,15 @@
 
 #define kAQMaxPacketDescs 512	// Number of packet descriptions in our array
 
-typedef enum
-{
-	AS_INITIALIZED = 0,
-	AS_STARTING_FILE_THREAD = 1,          // 启动线程
-	AS_WAITING_FOR_DATA = 2,              // 准备数据
-	AS_FLUSHING_EOF = 3,                  // 数据准备完毕
-	AS_WAITING_FOR_QUEUE_TO_START = 4,    // 排队播放
-	AS_PLAYING = 5,                       // 正在播放
-	AS_BUFFERING = 6,                     // 网络不好,自动缓冲
-	AS_PAUSED = 7,                        // 手动暂停    
-	AS_STOPPING = 8,                      // 即将停止,自动提醒
-	AS_STOPPED = 9,                       // 已停止播放
-} AudioStreamerState;
-
-typedef enum
-{
-	AS_NO_STOP = 0,
-	AS_STOPPING_EOF,
-	AS_STOPPING_USER_ACTION,
-	AS_STOPPING_ERROR,
-	AS_STOPPING_TEMPORARILY
-} AudioStreamerStopReason;
-
-typedef enum
-{
-	AS_NO_ERROR = 0,
-	AS_NETWORK_CONNECTION_FAILED,
-	AS_FILE_STREAM_GET_PROPERTY_FAILED,
-	AS_FILE_STREAM_SEEK_FAILED,
-	AS_FILE_STREAM_PARSE_BYTES_FAILED,
-	AS_FILE_STREAM_OPEN_FAILED,
-	AS_FILE_STREAM_CLOSE_FAILED,
-	AS_AUDIO_DATA_NOT_FOUND,
-	AS_AUDIO_QUEUE_CREATION_FAILED,
-	AS_AUDIO_QUEUE_BUFFER_ALLOCATION_FAILED,
-	AS_AUDIO_QUEUE_ENQUEUE_FAILED,
-	AS_AUDIO_QUEUE_ADD_LISTENER_FAILED,
-	AS_AUDIO_QUEUE_REMOVE_LISTENER_FAILED,
-	AS_AUDIO_QUEUE_START_FAILED,
-	AS_AUDIO_QUEUE_PAUSE_FAILED,
-	AS_AUDIO_QUEUE_BUFFER_MISMATCH,
-	AS_AUDIO_QUEUE_DISPOSE_FAILED,
-	AS_AUDIO_QUEUE_STOP_FAILED,
-	AS_AUDIO_QUEUE_FLUSH_FAILED,
-	AS_AUDIO_STREAMER_FAILED,
-	AS_GET_AUDIO_TIME_FAILED,
-	AS_AUDIO_BUFFER_TOO_SMALL
-} AudioStreamerErrorCode;
-
 extern NSString * const ASStatusChangedNotification;
-extern AudioStreamerErrorCode * errorCode;
+extern ErrorCode * errorCode;
 
 
 //播放在线音频
 @interface AudioStreamer : NSObject<PlayAudio>
 {
 	NSURL *url;
-	//
-	//  Special threading consideration:
-	//	The audioQueue property should only ever be accessed inside a
-	//	synchronized(self) block and only *after* checking that ![self isFinishing]
-	//
+	
 	AudioQueueRef audioQueue;
 	AudioFileStreamID audioFileStream;	// the audio file stream parser
 	AudioStreamBasicDescription asbd;	// description of the audio
@@ -112,9 +59,9 @@ extern AudioStreamerErrorCode * errorCode;
 	NSInteger buffersUsed;
 	NSDictionary *httpHeaders;
 	
-	AudioStreamerState state;
-	AudioStreamerStopReason stopReason;
-	AudioStreamerErrorCode errorCode;
+	State state;
+	StopReason stopReason;
+	ErrorCode errorCode;
     
 	OSStatus err;
 	
@@ -143,6 +90,7 @@ extern AudioStreamerErrorCode * errorCode;
 	double sampleRate;			// Sample rate of the file (used to compare with
 								// samples played by the queue for current playback
 								// time)
+    
 	double packetDuration;		// sample rate times frames per packet
 	double lastProgress;		// last calculated progress point
 #if TARGET_OS_IPHONE
@@ -150,14 +98,15 @@ extern AudioStreamerErrorCode * errorCode;
 #endif
 }
 
-@property AudioStreamerErrorCode errorCode;
-@property (readonly) AudioStreamerState state;
+@property ErrorCode errorCode;
+@property (readwrite) State state;
 @property (readonly) double progress;
 @property (readonly) double duration;
 @property (readwrite) UInt32 bitRate;
 @property (readonly) NSDictionary *httpHeaders;
 
 - (id)initWithURL:(NSURL *)aURL;
+
 @end
 
 

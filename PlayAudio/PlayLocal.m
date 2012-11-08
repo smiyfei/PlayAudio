@@ -15,7 +15,6 @@ static UInt32 gBufferSizeBytes=0x10000;//It muse be pow(2,x)
 
 @interface PlayLocal()
 
-@property (readwrite) PlayLocalState state;
 @property (nonatomic,retain) AVAudioPlayer *audioPlayer;
 
 //定义回调(Callback)函数
@@ -37,8 +36,10 @@ static void BufferCallack(void *inUserData,AudioQueueRef inAQ,
 
 - (id)initWithURL:(NSURL *)url error:(NSError **)outError
 {
-    if (self == [super init]) {
-        if (![url isFileURL]) {
+    if (self == [super init])
+    {
+        if (![url isFileURL])
+        {
             url = [NSURL fileURLWithPath:[NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil]];
         }
         audioURL = [url retain];
@@ -175,23 +176,23 @@ static void BufferCallBack(void *inUserData,AudioQueueRef inAQ,
 {
     @synchronized(self)
     {
-        if (state == PL_PAUSED) {
+        if (state == PAUSED) {
             [self pause];
         }
-        else if (state == PL_INITIALIZED) {
+        else if (state == INITIALIZED) {
             if ([self createQueue])
             {
                 Float32 gain = 1.0;
                 AudioQueueSetParameter(audioQueue, kAudioQueueParam_Volume, gain);
                 AudioQueueStart(audioQueue, nil);
-                state = PL_PLAYING;
+                state = PLAYING;
             }
             else
             {
                 NSLog(@"create queue failed");
             }
         }
-        else if(state == PL_PLAYING)
+        else if(state == PLAYING)
         {
             //do nothing
         }
@@ -202,7 +203,7 @@ static void BufferCallBack(void *inUserData,AudioQueueRef inAQ,
 {
     @synchronized(self)
 	{
-		if (state == PL_PLAYING)
+		if (state == PLAYING)
 		{
 			err = AudioQueuePause(audioQueue);
 			if (err)
@@ -210,9 +211,9 @@ static void BufferCallBack(void *inUserData,AudioQueueRef inAQ,
                 NSLog(@"err:%s","AUDIO_QUEUE_PAUSE_FAILED");
 				return;
 			}
-			self.state = PL_PAUSED;
+			self.state = PAUSED;
 		}
-		else if (state == PL_PAUSED)
+		else if (state == PAUSED)
 		{
 			err = AudioQueueStart(audioQueue, NULL);
 			if (err)
@@ -220,9 +221,25 @@ static void BufferCallBack(void *inUserData,AudioQueueRef inAQ,
                 NSLog(@"err:%s","AUDIO_QUEUE_START_FAILED");
 				return;
 			}
-			self.state = PL_PLAYING;
+			self.state = PLAYING;
 		}
 	}
+}
+
+- (void)setState:(State)aStatus
+{
+	@synchronized(self)
+	{
+		if (state != aStatus)
+		{
+			state = aStatus;
+		}
+	}
+}
+
+- (State)state
+{
+    return state;
 }
 
 - (void)stop
@@ -230,10 +247,10 @@ static void BufferCallBack(void *inUserData,AudioQueueRef inAQ,
     @synchronized(self)
 	{
 		
-        if (audioQueue && (state == PL_PLAYING || state == PL_PAUSED))
+        if (audioQueue && (state == PLAYING || state == PAUSED))
 		{
-			self.state = PL_STOPPING;
-			stopReason = PL_STOPPING_USER_ACTION;
+			self.state = STOPPING;
+			stopReason = STOPPING_USER_ACTION;
 			err = AudioQueueStop(audioQueue, true);
 			if (err)
 			{
@@ -241,78 +258,22 @@ static void BufferCallBack(void *inUserData,AudioQueueRef inAQ,
 				return;
 			}
 		}
-		else if (state != PL_INITIALIZED)
+		else if (state != INITIALIZED)
 		{
-			self.state = PL_STOPPED;
-			stopReason = PL_STOPPING_USER_ACTION;
+			self.state = STOPPED;
+			stopReason = STOPPING_USER_ACTION;
 		}
 		seekWasRequested = NO;
 	}
 }
 
-- (BOOL)isFinishing
-{
-    @synchronized (self)
-	{
-		if ((errorCode != PL_NO_ERROR && state != PL_INITIALIZED) ||
-			((state == PL_STOPPING || state == PL_STOPPED) &&
-             stopReason != PL_STOPPING_TEMPORARILY))
-		{
-			return YES;
-		}
-	}
-    
-	return NO;
-}
-
-- (BOOL)isPlaying
-{
-    @synchronized(self)
-    {
-        if(state == PL_PLAYING)
-        {
-            return YES;
-        }
-    
-    return NO;
-}
-}
-
-- (BOOL)isPaused
-{
-    @synchronized(self)
-    {
-        if (state == PL_PAUSED)
-        {
-            return  YES;
-        }
-        
-        return NO;
-    }
-}
-
-//- (BOOL)isWaiting
-//{
-//    @synchronized(self)
-//	{
-//		if (state == PL_STARTING_FILE_THREAD ||
-//			state == PL_WAITING_FOR_DATA ||
-//			state == PL_WAITING_FOR_QUEUE_TO_START ||
-//			state == PL_BUFFERING)
-//		{
-//			return YES;
-//		}
-//	}
-//	
-//	return NO;
-//}
-
+//本地的暂时没有
 - (void)seekToTime:(double)newSeekTime
 {
     @synchronized(self)
     {
         // Negative values skip to start of file
-        if (newSeekTime<0.0f )
+        if (newSeekTime<0.0f)
             newSeekTime = 0.0f;
         
         // Rounds down to remove sub-second precision
@@ -324,23 +285,14 @@ static void BufferCallBack(void *inUserData,AudioQueueRef inAQ,
             NSLog( @"Audio: IGNORING skip to <%.02f> (past EOF) of <%.02f> seconds", newSeekTime, audioPlayer.duration );
             return;
         }
-        
-        // See if playback is active prior to skipping
-        BOOL skipWhilePlaying = audioPlayer.playing;
-        
-        // Perform skip
+       
         NSLog( @"Audio: skip to <%.02f> of <%.02f> seconds", newSeekTime, audioPlayer.duration );
         
         // NOTE: This stop,set,prepare,(play) sequence produces reliable results on the simulator and device.
         [audioPlayer stop];
-        
         [audioPlayer setCurrentTime:newSeekTime];
-        
         [audioPlayer prepareToPlay];
-        
-        
-            [audioPlayer play];
-        
+        [audioPlayer play];
     }
 }
 
@@ -362,7 +314,11 @@ static void BufferCallBack(void *inUserData,AudioQueueRef inAQ,
     }
     
     return 0.0;
+}
 
+- (double)calculatedBitRate
+{
+    
 }
 
 

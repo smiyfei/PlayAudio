@@ -14,6 +14,4 @@
 
 @property (nonatomic,retain) AudioPlayer *audioPlayer;
 
-- (NSArray *)artworksForFileAtPath:(NSString *)path;
-
 @end

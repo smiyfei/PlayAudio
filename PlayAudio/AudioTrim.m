@@ -9,14 +9,28 @@
 #import "AudioTrim.h"
 #import "AVFoundation/AVFoundation.h"
 
+#define FADE_TIME_RANGE 5.0
+
+@interface AudioTrim()
+{
+    CMTime _startTime;
+    CMTime _endTime;
+    Float64 _duration;
+}
+@end
+
 @implementation AudioTrim
 
-- (BOOL)exportAsset:(AVAsset *)avAsset toFilePath:(NSString *)filePath startTime:(CMTime)startTime stopTime:(CMTime)stopTime
+- (BOOL)trimAudio:(NSString *)audioPath toFilePath:(NSString *)filePath startTime:(CMTime)startTime stopTime:(CMTime)stopTime
 {
+    _startTime = startTime;
+    _endTime = stopTime;
+    AVAsset *avAsset = [AVAsset assetWithURL:[NSURL fileURLWithPath:audioPath]];
     CMTime assetTime = [avAsset duration];
-    Float64 duration = CMTimeGetSeconds(assetTime);
+
+    _duration = CMTimeGetSeconds(assetTime);
     
-    if (duration < 50.0)
+    if (CMTimeGetSeconds(startTime) < 0.0 || CMTimeGetSeconds(stopTime) > _duration)
     {
         return NO;
     }
@@ -38,40 +52,76 @@
         return NO;
     }
     
-    // create trim time range - 20 seconds starting from 30 seconds into the asset
-    CMTimeRange exportTimeRange = CMTimeRangeFromTimeToTime(startTime, stopTime);
-    // create fade in time range - 10 seconds starting at the beginning of trimmed asset
-    CMTime startFadeInTime = startTime;
-    CMTime endFadeInTime = CMTimeMake(40, 1);
-    CMTimeRange fadeInTimeRange = CMTimeRangeFromTimeToTime(startFadeInTime,
-                                                            endFadeInTime);
-    // setup audio mix
+    // 剪切区间
+    CMTimeRange trimTimeRange = CMTimeRangeFromTimeToTime(startTime, stopTime);
+    // 创建音频淡入范围
+    CMTimeRange fadeInTimeRange = [self fadeInTimeRange];
+    CMTimeRange fadeOutTimeRange = [self fadeOutTimeRange];
+    
+    // 启动音频合成
     AVMutableAudioMix *exportAudioMix = [AVMutableAudioMix audioMix];
-    AVMutableAudioMixInputParameters *exportAudioMixInputParameters =
-    [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:track];
-    [exportAudioMixInputParameters setVolumeRampFromStartVolume:0.0 toEndVolume:1.0
-                                                      timeRange:fadeInTimeRange];
-    exportAudioMix.inputParameters = [NSArray
-                                      arrayWithObject:exportAudioMixInputParameters];
-    // configure export session  output with all our parameters
-    exportSession.outputURL = [NSURL fileURLWithPath:filePath]; // output path
-    exportSession.outputFileType = AVFileTypeAppleM4A; // output file type
-    exportSession.timeRange = exportTimeRange; // trim time range
-    exportSession.audioMix = exportAudioMix; // fade in audio mix
-    // perform the export
+    AVMutableAudioMixInputParameters *exportAudioMixInputParameters = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:track];
+    
+
+    [exportAudioMixInputParameters setVolumeRampFromStartVolume:0.0 toEndVolume:1.0 timeRange:fadeInTimeRange];
+    [exportAudioMixInputParameters setVolumeRampFromStartVolume:1.0 toEndVolume:0.0 timeRange:fadeOutTimeRange];
+    exportAudioMix.inputParameters = [NSArray arrayWithObject:exportAudioMixInputParameters];
+    // 配置输出信息
+    exportSession.outputURL = [NSURL fileURLWithPath:filePath];
+    exportSession.outputFileType = AVFileTypeAppleM4A;
+    exportSession.timeRange = trimTimeRange; 
+    exportSession.audioMix = exportAudioMix;
+    
+    // 输出
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
-        if (AVAssetExportSessionStatusCompleted == exportSession.status) {
+        if (AVAssetExportSessionStatusCompleted == exportSession.status)
+        {
             NSLog(@"AVAssetExportSessionStatusCompleted");
-        } else if (AVAssetExportSessionStatusFailed == exportSession.status) {
-            // a failure may happen because of an event out of your control
-            // for example, an interruption like a phone call comming in
-            // make sure and handle this case appropriately
+        }
+        else if (AVAssetExportSessionStatusFailed == exportSession.status)
+        {
             NSLog(@"AVAssetExportSessionStatusFailed");
-        } else {
+        }
+        else
+        {
             NSLog(@"Export Session Status: %d", exportSession.status);
         }
     }];
     
     return YES;
 }
+
+//  声音开始淡入
+- (CMTimeRange)fadeInTimeRange
+{
+    CMTimeRange fadeInTimeRange;
+    Float64 startTimeSecond = CMTimeGetSeconds(_startTime);
+    if ((startTimeSecond + FADE_TIME_RANGE) > _duration || (startTimeSecond + FADE_TIME_RANGE) > CMTimeGetSeconds(_endTime))
+    {
+        return fadeInTimeRange;
+    }
+    CMTime startFadeInTime = CMTimeMake(startTimeSecond - 1, 1);
+    CMTime endFadeInTime = CMTimeMake(startTimeSecond + FADE_TIME_RANGE,1);
+    fadeInTimeRange = CMTimeRangeFromTimeToTime(startFadeInTime, endFadeInTime);
+    
+    return fadeInTimeRange;
+}
+
+//  声音结束淡出
+- (CMTimeRange)fadeOutTimeRange
+{
+    CMTimeRange fadeOutTimeRange;
+    Float64 endTimeSecond = CMTimeGetSeconds(_endTime);
+    if ((endTimeSecond - FADE_TIME_RANGE) <= CMTimeGetSeconds(_startTime))
+    {
+        return fadeOutTimeRange;
+    }
+    
+    CMTime startFadeOutTime = CMTimeMake(endTimeSecond - FADE_TIME_RANGE, 1);
+    CMTime endFadeOutTime = _endTime;
+    fadeOutTimeRange = CMTimeRangeFromTimeToTime(startFadeOutTime, endFadeOutTime);
+    
+    return fadeOutTimeRange;
+}
+
 @end

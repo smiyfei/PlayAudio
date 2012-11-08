@@ -14,8 +14,6 @@
 		1D53097F1638E1440083F60C /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D53097E1638E1440083F60C /* AudioPlayer.m */; };
 		1D53099016392FA20083F60C /* AudioParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D53098F16392FA20083F60C /* AudioParam.m */; };
 		1D53099E163948C30083F60C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D53099D163948C30083F60C /* CFNetwork.framework */; };
-		1D54518C1640C3B3001093BA /* lmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D54518A1640C3B3001093BA /* lmp3lame.a */; };
-		1D54518D1640C3B3001093BA /* lmp3lame.la in Resources */ = {isa = PBXBuildFile; fileRef = 1D54518B1640C3B3001093BA /* lmp3lame.la */; };
 		1D64AA3F164103E600E03489 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D64AA3E164103E600E03489 /* AVFoundation.framework */; };
 		1DAFC6B61637F265007C9988 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B51637F265007C9988 /* UIKit.framework */; };
 		1DAFC6B81637F265007C9988 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DAFC6B71637F265007C9988 /* Foundation.framework */; };
@@ -47,9 +45,6 @@
 		1D53098E16392FA20083F60C /* AudioParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioParam.h; sourceTree = "<group>"; };
 		1D53098F16392FA20083F60C /* AudioParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioParam.m; sourceTree = "<group>"; };
 		1D53099D163948C30083F60C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		1D5451891640C3B3001093BA /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
-		1D54518A1640C3B3001093BA /* lmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = lmp3lame.a; sourceTree = "<group>"; };
-		1D54518B1640C3B3001093BA /* lmp3lame.la */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lmp3lame.la; sourceTree = "<group>"; };
 		1D64AA3E164103E600E03489 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1DAFC6B11637F265007C9988 /* PlayAudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayAudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DAFC6B51637F265007C9988 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -92,7 +87,6 @@
 				1DAFC6B61637F265007C9988 /* UIKit.framework in Frameworks */,
 				1DAFC6B81637F265007C9988 /* Foundation.framework in Frameworks */,
 				1DAFC6BA1637F265007C9988 /* CoreGraphics.framework in Frameworks */,
-				1D54518C1640C3B3001093BA /* lmp3lame.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,16 +107,6 @@
 				1D28D0701642508800F3C2B0 /* AudioStreamer.m */,
 			);
 			name = AudioPlayer;
-			sourceTree = "<group>";
-		};
-		1D5451881640C3B3001093BA /* lame */ = {
-			isa = PBXGroup;
-			children = (
-				1D5451891640C3B3001093BA /* lame.h */,
-				1D54518A1640C3B3001093BA /* lmp3lame.a */,
-				1D54518B1640C3B3001093BA /* lmp3lame.la */,
-			);
-			path = lame;
 			sourceTree = "<group>";
 		};
 		1D5451901640C899001093BA /* AudioTrim */ = {
@@ -185,7 +169,6 @@
 			children = (
 				1D5451961640CAEC001093BA /* Audio */,
 				1D5451901640C899001093BA /* AudioTrim */,
-				1D5451881640C3B3001093BA /* lame */,
 				1D5309781638E0810083F60C /* AudioPlayer */,
 				1DAFC6C41637F265007C9988 /* AppDelegate.h */,
 				1DAFC6C51637F265007C9988 /* AppDelegate.m */,
@@ -265,7 +248,6 @@
 				1DAFC6CA1637F265007C9988 /* Default@2x.png in Resources */,
 				1DAFC6CC1637F265007C9988 /* Default-568h@2x.png in Resources */,
 				1DAFC6E61637F778007C9988 /* kaibulekou.mp3 in Resources */,
-				1D54518D1640C3B3001093BA /* lmp3lame.la in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

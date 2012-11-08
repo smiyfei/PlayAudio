@@ -14,10 +14,10 @@
 @property (nonatomic,copy) NSString *artist;
 @property (nonatomic,copy) NSString *album;
 @property (nonatomic,copy) NSString *duration;
-@property (nonatomic,copy) UIImage  *artwork;
+@property (nonatomic,copy) NSString *year;
+@property (nonatomic,retain) NSArray  *artwork;
 
 //获取音乐名称、艺术家、插图等信息
-- (NSMutableDictionary *)audioParamWithAudioPath:(NSString *)path;
-//获取音乐插图
-- (NSArray *)artworksForFileAtPath:(NSString *)path;
+- (id)initWithAudioPath:(NSString *)path;
+
 @end
